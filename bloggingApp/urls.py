@@ -11,12 +11,14 @@ urlpatterns = [
 
     path('admin/', admin.site.urls),
 
-    path('', post_views.list_posts, name='feed'),
+    path('', post_views.PostsFeedView.as_view(), name='feed'),
     path('posts/new/', views.CreatePostView.as_view(), name='create_post'),
     path('posts/<str:username>/<int:pk>/', views.PostDetailView.as_view(), name='post_detail'),
 
-    path('login/', users_views.login_view, name='login'),
-    path('logout', users_views.logout_view, name='logout'),
+    path('blogs/<str:username>', users_views.UserDetailView.as_view(), name='user_blog'),
+
+    path('login/', users_views.LoginView.as_view(), name='login'),
+    path('logout', users_views.LogoutView.as_view(), name='logout'),
     path('signup', users_views.SignupView.as_view(), name='signup'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

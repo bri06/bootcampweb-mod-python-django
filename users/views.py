@@ -50,10 +50,4 @@ class SignupView(FormView):
 
 class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
   """Logout view"""
-  pass
-
-@login_required
-def logout_view(request):
-  """Logout a user"""
-  logout(request)
-  return redirect('login')
+  next_page = 'login/'

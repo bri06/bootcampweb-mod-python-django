@@ -14,4 +14,9 @@
         <h3>{{ post.description }}</h3>
         <p>{{ post.text }}</p>
     </p>
+    <div class="ml-2 mt-0 mb-2">
+        {% for category in object.categories.all %}
+            <h1>{{ category.name }}</h1>
+        {% endfor %}
+    </div>
 </div>

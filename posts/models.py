@@ -17,7 +17,6 @@ class Post(models.Model):
   """Post model"""
 
   user = models.ForeignKey(User, on_delete=models.CASCADE)
-  profile = models.ForeignKey('users.Profile', on_delete=models.CASCADE)
 
   title = models.CharField(max_length=255)
   description = models.CharField(max_length=300, blank=True)

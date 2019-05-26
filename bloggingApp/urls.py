@@ -6,6 +6,7 @@ from django.urls import path
 from posts import views
 from posts import views as post_views
 from users import views as users_views
+from users.api import UsersAPI, UserDetailAPI
 
 urlpatterns = [
 
@@ -20,5 +21,9 @@ urlpatterns = [
     path('login/', users_views.LoginView.as_view(), name='login'),
     path('logout', users_views.LogoutView.as_view(), name='logout'),
     path('signup', users_views.SignupView.as_view(), name='signup'),
+
+    # API
+    path('api/users/', UsersAPI.as_view(), name='users_api'),
+    path('api/users/<int:pk>', UserDetailAPI.as_view(), name='user_detail')
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

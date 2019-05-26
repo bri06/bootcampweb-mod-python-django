@@ -16,6 +16,7 @@ from users.permissions import UserPermission
 
 class UsersAPI(GenericAPIView):
 
+  permission_classes = [UserPermission]
 
   def get(self, request):
     users = User.objects.all()
@@ -34,19 +35,24 @@ class UsersAPI(GenericAPIView):
 
 class UserDetailAPI(APIView):
 
+  permission_classes = [UserPermission]
+
   def get(self, request, pk):
     """Get user detail"""
     user = get_object_or_404(User, pk=pk)
+    self.check_object_permissions(request, user)
     serializer = UserSerializer(user)
     return Response(serializer.data)
 
   def delete(self, request, pk):
     user = get_object_or_404(User, pk=pk)
+    self.check_object_permissions(request, user)
     user.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
 
   def put(self, request, pk):
     user = get_object_or_404(User, pk=pk)
+    self.check_object_permissions(request, user)
     serializer = WriteUserSerializer(user, data=request.data)
     if serializer.is_valid():
       updated_user = serializer.save()

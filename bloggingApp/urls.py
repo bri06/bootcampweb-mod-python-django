@@ -7,6 +7,7 @@ from posts import views
 from posts import views as post_views
 from users import views as users_views
 from users.api import UsersAPI, UserDetailAPI
+from posts.api import PostsAPI, PostsDetailAPI
 
 urlpatterns = [
 
@@ -24,6 +25,8 @@ urlpatterns = [
 
     # API
     path('api/users/', UsersAPI.as_view(), name='users_api'),
-    path('api/users/<int:pk>', UserDetailAPI.as_view(), name='user_detail')
+    path('api/users/<int:pk>', UserDetailAPI.as_view(), name='user_detail'),
+    path('api/posts/', PostsAPI.as_view(), name='posts_api'),
+    path('api/posts/<int:pk>', PostsDetailAPI.as_view(), name='posts_detail'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
